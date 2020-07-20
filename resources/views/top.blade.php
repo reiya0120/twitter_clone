@@ -17,6 +17,15 @@
             margin: 0;
         }
 
+        a{
+          color: #636b6f;
+        }
+
+        a:visited{
+          color:#636b6f;
+          text-decoration: none;
+        }
+
         .full-height {
             height: 100vh;
         }
@@ -55,12 +64,17 @@
             text-transform: uppercase;
         }
 
-        .all{
-          border: solid;
+        .a{
           width: 425px;
           height: 175px;
           margin-left: 40px;
           margin-bottom: 25px;
+        }
+
+        .all{
+          border: solid;
+          width: 425px;
+          height: 175px;
           display: flex;
         }
 
@@ -124,13 +138,17 @@
         <div class="row justify-content-center">
           <div class="">
             @foreach ($all_tweets as $tweet)
-            <div class="all">
-              <img src="{{$tweet->profile_image}}" alt="">
-              <div class="palagraf">
-                <p class="name">{{$tweet->name}}/@ {{$tweet->screen_name}}</p>
-                <p class="text">{{$tweet->text}}</p>
-                <p class="time">{{$tweet->created_at}}</p>
-              </div>
+            <div class="a">
+              <a href="{{ url('/ather_user'.$tweet->user_id) }}">
+                <div class="all">
+                  <img src="{{$tweet->profile_image}}" alt="">
+                  <div class="palagraf">
+                    <p class="name">{{$tweet->name}}/&#64;{{$tweet->screen_name}}</p>
+                    <p class="text">{{$tweet->text}}</p>
+                    <p class="time">{{$tweet->created_at}}</p>
+                  </div>
+                </div>
+              </a>
             </div>
             @endforeach
           </div>

@@ -23,7 +23,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/top','TweetsController@index');
 
-Route::get('/ather_user','Ather_userController@index');
+Route::get('/ather_user{user}','Ather_userController@index');
 // ログイン状態
 Route::group(['middleware' => 'auth'], function() {
 
@@ -31,8 +31,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('users', 'UsersController',['only' => ['index', 'create' , 'store' ,'show']]);
 
     //フォロー関係
-    Route::post('/ather_user/follow', 'UsersController@follow')->name('follow');
-   Route::delete('/ather_user/unfollow', 'UsersController@unfollow')->name('unfollow');
+    Route::get('/ather_user{user}/follow', 'Ather_userController@follow')->name('follow');
+   Route::get('/ather_user{user}/unfollow', 'Ather_userController@unfollow')->name('unfollow');
 
    // ツイート関連
     Route::resource('tweets', 'TweetsController', ['only' => ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']]);
