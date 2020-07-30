@@ -30,10 +30,20 @@ Route::group(['middleware' => 'auth'], function() {
     // ユーザ関連
     Route::resource('users', 'UsersController',['only' => ['index', 'create' , 'store' ,'show']]);
 
+    Route::get('/login_user','login_userController@index');
+
     //フォロー関係
     Route::get('/ather_user{user}/follow', 'Ather_userController@follow')->name('follow');
    Route::get('/ather_user{user}/unfollow', 'Ather_userController@unfollow')->name('unfollow');
 
    // ツイート関連
-    Route::resource('tweets', 'TweetsController', ['only' => ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']]);
+    Route::post('/tweets/create', 'TweetsController@create');
+
+    //プロフィール編集
+      Route::get('login_user/prof_edit','login_userController@prof_edit');
+      Route::post('login_user/prof_edit/edit','login_userController@edit');
+
+    //一覧
+    Route::get('login_user/follow_list','login_userController@follow_list');
+    Route::get('login_user/follower_list','login_userController@follower_list');
 });

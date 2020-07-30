@@ -28,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/login_user';
 
     /**
      * Create a new controller instance.
@@ -67,6 +67,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'screen_name' => $data['screen_name'],
             'password' => Hash::make($data['password']),
+            'profile_image' => 'https://placehold.jp/50x50.png'
         ]);
     }
 }

@@ -100,6 +100,7 @@
       <p class="">{{$user_data[0]->screen_name}}/&#64;{{$user_data[0]->name}}</p>
       <p class="follow">フォロー{{$follow_count}}人</p>
       <p class="follow">フォロワー{{$followr_count}}人</p>
+      @auth
       @if ($follow_exists)
       <p>フォロー中</p>
       @else
@@ -110,6 +111,7 @@
       @else
       <a href="{{url('ather_user'.$user_data[0]->id.'/follow')}}">フォローする</a>
       @endif
+      @endauth
     </div>
     @foreach ($followr_tweet as $tweet)
     <div class="all">

@@ -27,4 +27,20 @@ class TweetsController extends Controller
         'all_tweets'  => $all_tweets
     ]);
   }
+
+  public function create(Request $request)
+  {
+    $validatedData = $request->validate([
+        'text' => 'required|min:1|max:255',
+    ]);
+    $user_id = \auth::id();
+    $teet_insert = DB::table('Tweets')
+                    ->insert([
+                      'text' => $request->text,
+                      'user_id' => $user_id,
+                      'created_at' => now(),
+                      'updated_at' => now()
+                    ]);
+    return redirect('login_user');
+  }
 }
