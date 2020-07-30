@@ -2,7 +2,7 @@
 <html lang="ja" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>フォロー一覧</title>
     <style media="screen">
     html, body {
         background-color: #fff;
@@ -77,19 +77,35 @@
       top : 45%;
     }
 
-    a{
+    .login_header a{
       color: #000;
     }
 
-    a:visited{
+    .login_header a:visited{
       color:#000;
       text-decoration: none;
+    }
+
+    a{
+      color: #636b6f;
+    }
+
+    a:visited{
+      color:#636b6f;
+      text-decoration: none;
+    }
+
+    .a{
+      width: 425px;
+      height: 175px;
+      margin-left: 40px;
+      margin-bottom: 25px;
     }
 
     </style>
   </head>
 <body>
-  @extends('layouts/header')
+  @extends('layouts/parent')
   @section('header')
     <div class="title m-b-md">
         Twitter_clone
@@ -112,19 +128,21 @@
   @endsection
   @section('contents')
   @foreach($follow_data as $follow)
-  <a href="{{ url('/ather_user'.$follow->id) }}">
-  <div class="all">
-      <img src="{{$follow->profile_image}}" alt="">
-      <div class="palagraf">
-        <p class="name">{{$follow->name}}/&#64;{{$follow->screen_name}}</p>
-        @if ($follow_exists)
-        <p class="exist">フォローされている</p>
-        @else
-        <p class="exist">フォローされていない</p>
-        @endif
+  <div class="a">
+    <a href="{{ url('/ather_user'.$follow->id) }}">
+      <div class="all">
+        <img src="{{$follow->profile_image}}" alt="">
+        <div class="palagraf">
+          <p class="name">{{$follow->name}}/&#64;{{$follow->screen_name}}</p>
+          @if ($follow_exists)
+          <p class="exist">フォローされている</p>
+          @else
+          <p class="exist">フォローされていない</p>
+          @endif
+        </div>
       </div>
+    </a>
   </div>
-</a>
   @endforeach
   @endsection
 </body>

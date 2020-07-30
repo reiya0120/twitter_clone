@@ -2,7 +2,7 @@
 <html lang="ja" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>会員登録</title>
     <style media="screen">
     html, body {
         background-color: #fff;
@@ -60,13 +60,13 @@
     </header>
     <div class="container">
       <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div>
 
             <div class="card-body">
               <form method="POST" action="{{ route('register') }}">
                 @csrf
 
-                <div class="form-group row">
+                <div>
                   <p><label for="name" class="col-md-4 form-label text-md-right">{{ __('名前') }}</label></p>
 
                   <div class="col-md-6">
@@ -80,36 +80,36 @@
                   </div>
                 </div>
 
-                <div class="form-group row">
-                  <p><label for="screen_name" class="col-md-4 form-label text-md-right">{{ __('ユーザー名') }}</label></p>
+                <div>
+                  <p><label for="screen_name" class="form-label">{{ __('ユーザー名') }}</label></p>
 
                   <div class="col-md-6">
                     <input id="screen_name" type="text" class="form-control{{ $errors->has('screen_name') ? ' is-invalid' : '' }}" name="screen_name" value="{{ old('screen_name') }}" required>
 
                     @if ($errors->has('screen_name'))
-                    <span class="invalid-feedback" role="alert">
+                    <span role="alert">
                       <strong>{{ $errors->first('screen_name') }}</strong>
                     </span>
                     @endif
                   </div>
                 </div>
 
-                <div class="form-group row">
-                  <p><label for="password" class="col-md-4 form-label text-md-right">{{ __('パスワード') }}</label></p>
+                <div>
+                  <p><label for="password" class="form-label">{{ __('パスワード') }}</label></p>
 
-                  <div class="col-md-6">
+                  <div>
                     <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
 
                     @if ($errors->has('password'))
-                    <span class="invalid-feedback" role="alert">
+                    <span role="alert">
                       <strong>{{ $errors->first('password') }}</strong>
                     </span>
                     @endif
                   </div>
                 </div>
 
-                <div class="form-group row">
-                  <p><label for="password-confirm" class="col-md-4 form-label text-md-right">{{ __('パスワード(確認)') }}</label></p>
+                <div>
+                  <p><label for="password-confirm" class="form-label">{{ __('パスワード(確認)') }}</label></p>
 
                   <div class="col-md-6">
                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>

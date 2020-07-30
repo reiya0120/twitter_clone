@@ -2,7 +2,7 @@
 <html lang="ja" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>プロフィール編集</title>
     <style media="screen">
     html, body {
         background-color: #fff;
@@ -112,7 +112,7 @@
     </style>
   </head>
 
-@extends('layouts/header')
+@extends('layouts/parent')
 @section('header')
 <div class="title m-b-md">
     Twitter_clone
@@ -135,19 +135,29 @@
 @endsection
 @section('contents')
 <div class="content">
-  <form class="" action="{{ url('/login_user/prof_edit/edit') }}" method="post">
+  <form class="" action="{{ url('/login_user/prof_edit/edit') }}" method="post" enctype=”multipart/form-data”>
     @csrf
     <p>名前</p>
     <input type="text" name="name" value="{{$user_data[0]->name}}">
+    @if ($errors->has('name'))
+    <span class="invalid-feedback" role="alert">
+      <strong>{{ $errors->first('name') }}</strong>
+    </span>
+    @endif
     <p>ユーザー名</p>
     <p>&#64;{{$user_data[0]->screen_name}}</p>
     <p>パスワード(変更する場合のみ)</p>
     <input type="text" name="password" value="">
+    @if ($errors->has('password'))
+    <span class="invalid-feedback" role="alert">
+      <strong>{{ $errors->first('password') }}</strong>
+    </span>
+    @endif
     <p>パスワード(確認)</p>
-    <input type="text" name="re_password" value="">
+    <input type="text" name="password_confirmation" value="">
     <div class="prof_img">
       <img src="{{$user_data[0]->profile_image}}" alt="">
-      <input type="file" name="file" value="参照" class="file" accept="image/jpeg,image/x-png,image/gif">
+      <input type="file" name="file" class="file" id="file" accept="image/jpeg,image/x-png,image/gif">
     </div>
     <input type="submit" value="更新" class="submit">
   </form>

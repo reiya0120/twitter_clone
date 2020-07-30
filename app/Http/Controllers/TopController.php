@@ -21,10 +21,18 @@ class TopController extends Controller
   {
     //userとtweetを結合
     $all_tweets = DB::table('Tweets')
+                      ->select('Tweets.created_at as tweet_created_at','user_id','profile_image','name','screen_name','text')
                       ->join('Users','Tweets.user_id' ,'=','Users.id')
+                      ->orderBy('tweet_created_at','desc')
+                      ->orderBy('screen_name','desc')
                       ->get();
+    $user_id = \Auth::id();
+    $user_data = DB::table('users')
+                   ->Where('id','=',$user_id)
+                   ->get();
     return view('top', [
-        'all_tweets'  => $all_tweets
+        'all_tweets'  => $all_tweets,
+        'user_data' => $user_data
     ]);
   }
 }

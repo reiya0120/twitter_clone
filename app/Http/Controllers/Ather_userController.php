@@ -16,6 +16,9 @@ class Ather_userController extends Controller
     {
       $followid = 0;
       $login_user = \Auth::id();
+      if ($user->id === $login_user) {
+        return back();
+      }
       if (DB::table('followers')
             ->where('following_id','=',$user->id)
             ->exists()) {

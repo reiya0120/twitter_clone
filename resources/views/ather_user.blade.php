@@ -2,7 +2,7 @@
 <html lang="ja" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>タイムライン(他ユーザー)</title>
     <style media="screen">
 
     html, body {
@@ -21,6 +21,22 @@
     a:visited{
       color:#636b6f;
       text-decoration: none;
+    }
+
+    .login_header{
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin: 0 0 0 auto;
+      font-size: 25px;
+    }
+
+    .login_header a{
+      padding: 0 10px 0 20px;
+    }
+
+    .login_header p{
+      padding: 0 20px 0 0;
     }
 
     .title {
@@ -107,6 +123,25 @@
       width: 100%;
       padding: 10px 10px 10px 20px;
       border: solid;
+      display: flex;
+    }
+
+    .login_header a{
+      color: #000;
+    }
+
+    .login_header a:visited{
+      color:#000;
+      text-decoration: none;
+    }
+
+    a{
+      color: #636b6f;
+    }
+
+    a:visited{
+      color:#636b6f;
+      text-decoration: none;
     }
 
     </style>
@@ -116,6 +151,21 @@
       <div class="title m-b-md">
           Twitter_clone
       </div>
+      @auth
+      <div class="login_header">
+        <p>{{$user_data[0]->screen_name}}/&#64;{{$user_data[0]->name}}</p>
+        <a href="{{ url('/login_user') }}">タイムライン</a>
+            <a class="dropdown-item" href="{{ route('logout') }}"
+               onclick="event.preventDefault();
+                             document.getElementById('logout-form').submit();">
+                {{ __('Logout') }}
+            </a>
+
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+      </div>
+      @endauth
     </header>
     <div class="user_info">
       <img src="{{$user_data[0]->profile_image}}" alt="Noimg">

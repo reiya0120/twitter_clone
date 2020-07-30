@@ -47,6 +47,7 @@ class HomeController extends Controller
                       ->select('Tweets.created_at as tweet_created_at','user_id','profile_image','name','screen_name','text')
                       ->join('Users','Tweets.user_id' ,'=','Users.id')
                       ->orderBy('tweet_created_at','desc')
+                      ->orderBy('screen_name','desc')
                       ->get();
 
         $user_data = DB::table('users')

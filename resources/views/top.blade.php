@@ -2,9 +2,7 @@
 <html lang="ja" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Twitter_clone</title>
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+    <title>トップ</title>
 
     <!-- Styles -->
     <style>
@@ -111,6 +109,41 @@
           width: 100%;
           padding: 10px 10px 10px 20px;
           border: solid;
+          display: flex;
+        }
+
+        .login_header{
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+          margin: 0 0 0 auto;
+          font-size: 25px;
+        }
+
+        .login_header a{
+          padding: 0 10px 0 20px;
+        }
+
+        .login_header p{
+          padding: 0 20px 0 0;
+        }
+
+        .login_header a{
+          color: #000;
+        }
+
+        .login_header a:visited{
+          color:#000;
+          text-decoration: none;
+        }
+
+        a{
+          color: #636b6f;
+        }
+
+        a:visited{
+          color:#636b6f;
+          text-decoration: none;
         }
 
     </style>
@@ -120,6 +153,21 @@
       <div class="title m-b-md">
           Twitter_clone
       </div>
+      @auth
+      <div class="login_header">
+        <p>{{$user_data[0]->screen_name}}/&#64;{{$user_data[0]->name}}</p>
+        <a href="{{ url('/login_user') }}">タイムライン</a>
+            <a class="dropdown-item" href="{{ route('logout') }}"
+               onclick="event.preventDefault();
+                             document.getElementById('logout-form').submit();">
+                {{ __('Logout') }}
+            </a>
+
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+      </div>
+      @endauth
     </header>
     @if (Route::has('login'))
     <div class="links">
@@ -145,7 +193,7 @@
                   <div class="palagraf">
                     <p class="name">{{$tweet->name}}/&#64;{{$tweet->screen_name}}</p>
                     <p class="text">{{$tweet->text}}</p>
-                    <p class="time">{{$tweet->created_at}}</p>
+                    <p class="time">{{$tweet->tweet_created_at}}</p>
                   </div>
                 </div>
               </a>

@@ -39,7 +39,6 @@
 
 
     img{
-      /* margin: auto 10px; */
       width: 75px;
       height: 75px;
     }

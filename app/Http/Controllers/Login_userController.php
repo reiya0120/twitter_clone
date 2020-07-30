@@ -10,6 +10,7 @@ use Illuminate\Auth\GenericUser;
 use App\User;
 use App\Models\Tweet;
 use App\Models\Follower;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 
 class Login_userController extends Controller
@@ -32,6 +33,7 @@ class Login_userController extends Controller
                       ->select('Tweets.created_at as tweet_created_at','user_id','profile_image','name','screen_name','text')
                       ->join('Users','Tweets.user_id' ,'=','Users.id')
                       ->orderBy('tweet_created_at','desc')
+                      ->orderBy('screen_name','desc')
                       ->get();
 
         $user_data = DB::table('users')
@@ -131,34 +133,41 @@ class Login_userController extends Controller
 
     public function edit(Request $request)
     {
-      $validatedData = $request->validate([
+      $validatedname = $request->validate([
           'name' => 'required|min:1|max:32',
-          'password'=>'min:8|max:255',
-          're_password'=>'same:password|min:8|max:255',
-          'file'=>'max:1000'
       ]);
       $user = \Auth::id();
-      $password = DB::table('users')
-                    ->where('id',$user)
-                    ->select('password')
-                    ->get();
-        $profile_image = DB::table('users')
-        ->where('id',$user)
-        ->get();
+      $updatename=DB::table('users')
+      ->where('id',$user)
+      ->update([
+        'name'=>$request['name'],
+        'updated_at' =>now()
+      ]);
+
       if ($request->password !== NULL) {
-        $password = $request->password;
+        $validatedpass = $request->validate([
+          'password'=>'min:8|max:255|confirmed'
+        ]);
+        $updatename=DB::table('users')
+        ->where('id',$user)
+        ->update([
+          'password'=>Hash::make($request->password)
+        ]);
       }
-      if (isset($request['profile_image'])) {
-      $profile_image =  $request['file'];
+
+      if ($request['file'] !== NULL) {
+        $validatedfile = $request->validate([
+          'file'=>'max:1000'
+        ]);
+        $updatefile=DB::table('users')
+        ->where('id',$user)
+        ->update([
+          'profile_image'=> $request['file']
+        ]);
       }
-      $update=DB::table('users')
-                ->where('id',$user)
-                ->update([
-                    'name'=>$request['name'],
-                  'password'=>Hash::make($password),
-                  'profile_image'=> $profile_image[0]->profile_image,
-                  'updated_at' =>now()
-                ]);
+      $profile_image = DB::table('users')
+      ->where('id',$user)
+      ->get();
 
             $followid = 0;
             if (DB::table('followers')
@@ -175,6 +184,7 @@ class Login_userController extends Controller
                       ->select('Tweets.created_at as tweet_created_at','user_id','profile_image','name','screen_name','text')
                       ->join('Users','Tweets.user_id' ,'=','Users.id')
                       ->orderBy('tweet_created_at','desc')
+                      ->orderBy('screen_name','desc')
                       ->get();
 
         $user_data = DB::table('users')

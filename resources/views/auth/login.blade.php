@@ -2,7 +2,7 @@
 <html lang="ja" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>ログイン</title>
     <style media="screen">
     html, body {
         background-color: #fff;
@@ -66,25 +66,25 @@
               <div class="form-group row">
                 <p><label for="screen_name" class="form_label">{{ __('ユーザー名') }}</label></p>
 
-                <div class="col-md-6">
+                <div>
                   <input id="screen_name" type="text" class="form-control{{ $errors->has('screen_name') ? ' is-invalid' : '' }}" name="screen_name" value="{{ old('screen_name') }}" required autofocus>
 
                   @if ($errors->has('screen_name'))
-                  <span class="invalid-feedback" role="alert">
+                  <span role="alert">
                     <strong>{{ $errors->first('screen_name') }}</strong>
                   </span>
                   @endif
                 </div>
               </div>
 
-              <div class="form-group row">
+              <div>
                 <p><label for="password" class="form_label">{{ __('パスワード') }}</label></p>
 
-                <div class="col-md-6">
+                <div>
                   <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
 
                   @if ($errors->has('password'))
-                  <span class="invalid-feedback" role="alert">
+                  <span role="alert">
                     <strong>{{ $errors->first('password') }}</strong>
                   </span>
                   @endif

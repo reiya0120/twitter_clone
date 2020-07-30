@@ -21,15 +21,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/top','TweetsController@index');
-
 Route::get('/ather_user{user}','Ather_userController@index');
 // ログイン状態
 Route::group(['middleware' => 'auth'], function() {
 
     // ユーザ関連
-    Route::resource('users', 'UsersController',['only' => ['index', 'create' , 'store' ,'show']]);
-
     Route::get('/login_user','login_userController@index');
 
     //フォロー関係

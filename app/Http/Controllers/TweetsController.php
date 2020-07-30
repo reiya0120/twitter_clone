@@ -31,7 +31,7 @@ class TweetsController extends Controller
   public function create(Request $request)
   {
     $validatedData = $request->validate([
-        'text' => 'required|min:1|max:255',
+        'text' => 'required|min:1|max:140',
     ]);
     $user_id = \auth::id();
     $teet_insert = DB::table('Tweets')

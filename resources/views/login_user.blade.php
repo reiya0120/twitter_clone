@@ -2,7 +2,7 @@
 <html lang="ja" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>タイムライン(ログイン中ユーザー)</title>
     <style media="screen">
     html, body {
         background-color: #fff;
@@ -60,6 +60,11 @@
       font-size: 20px;
     }
 
+    .a{
+      width: 425px;
+      height: 175px;
+    }
+
     .all{
       border: solid;
       width: 425px;
@@ -89,11 +94,11 @@
     }
 
     a{
-      color: #000;
+      color: #636b6f;
     }
 
     a:visited{
-      color:#000;
+      color:#636b6f;
       text-decoration: none;
     }
 
@@ -166,13 +171,17 @@
     </form>
 
     @foreach ($user_tweets as $user)
-    <div class="all">
-      <img src="{{$user->profile_image}}" alt="">
-      <div class="palagraf">
-        <p class="name">{{$user->name}}/&#64;{{$user->screen_name}}</p>
-        <p class="text">{{$user->text}}</p>
-        <p class="time">{{$user->tweet_created_at}}</p>
-      </div>
+    <div class="a">
+      <a href="{{ url('/ather_user'.$user->user_id) }}">
+        <div class="all">
+          <img src="{{$user->profile_image}}" alt="">
+          <div class="palagraf">
+            <p class="name">{{$user->name}}/&#64;{{$user->screen_name}}</p>
+            <p class="text">{{$user->text}}</p>
+            <p class="time">{{$user->tweet_created_at}}</p>
+          </div>
+        </div>
+      </a>
     </div>
     @endforeach
 
