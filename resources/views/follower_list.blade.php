@@ -78,11 +78,11 @@
     }
 
     a{
-      color: #636b6f;
+      color: #000;
     }
 
     a:visited{
-      color:#636b6f;
+      color:#000;
       text-decoration: none;
     }
 
